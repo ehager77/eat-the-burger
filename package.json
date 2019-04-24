@@ -19,6 +19,9 @@
   },
   "homepage": "https://github.com/ehager77/eat-the-burger#readme",
   "dependencies": {
-    "express": "^4.16.4"
+    "express": "^4.16.4",
+    "express-handlebars": "^3.0.2",
+    "mysql": "^2.17.1",
+    "mysql2": "^1.6.5"
   }
 }
