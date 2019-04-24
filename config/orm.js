@@ -1,31 +1,94 @@
-// Pull in required dependencies
-var mysql = require('mysql');
+// Import the MySQL connection object
+var connection = require ('./connection.js');
 
-// Create the MySQL connection object
-var connection;
+// Helper function for generating MySQL syntax
+function printQuestionMarks(num) {
+	var arr = [];
 
-if (process.env.JAWSDB_URL) {
-	// DB is JawsDB on Heroku
-	connection = mysql.createConnection(process.env.JAWSDB_URL);
-} else {
-	// DB is local on localhost
-	connection = mysql.createConnection({
-		port: 3306,
-        host: process.env.host,
-		user: process.env.username,
-		password: process.env.password,
-		database: process.env.database
-	})
+	for (var i = 0; i < num; i++) {
+		arr.push("?");
+	}
+
+	return arr.toString();
+}
+
+// Helper function for generating My SQL syntax
+function objToSql(ob) {
+	var arr = [];
+
+	for (var key in ob) {
+		arr.push(key + "=" + ob[key]);
+	}
+
+	return arr.toString();
+}
+
+// Create the ORM object to perform SQL queries
+var orm = {
+	// Function that returns all table entries
+	selectAll: function(tableInput, cb) {
+		// Construct the query string that returns all rows from the target table
+		var queryString = "SELECT * FROM " + tableInput + ";";
+
+		// Perform the database query
+		connection.query(queryString, function(err, result) {
+			if (err) {
+				throw err;
+			}
+
+			// Return results in callback
+			cb(result);
+		});
+	},
+
+	// Function that insert a single table entry
+	insertOne: function(table, cols, vals, cb) {
+		// Construct the query string that inserts a single row into the target table
+		var queryString = "INSERT INTO " + table;
+
+		queryString += " (";
+		queryString += cols.toString();
+		queryString += ") ";
+		queryString += "VALUES (";
+		queryString += printQuestionMarks(vals.length);
+		queryString += ") ";
+
+		// console.log(queryString);
+
+		// Perform the database query
+		connection.query(queryString, vals, function(err, result) {
+			if (err) {
+				throw err;
+			}
+
+			// Return results in callback
+			cb(result);
+		});
+	},
+
+	// Function that updates a single table entry
+	updateOne: function(table, objColVals, condition, cb) {
+		// Construct the query string that updates a single entry in the target table
+		var queryString = "UPDATE " + table;
+
+		queryString += " SET ";
+		queryString += objToSql(objColVals);
+		queryString += " WHERE ";
+		queryString += condition;
+
+		// console.log(queryString);
+
+		// Perform the database query
+		connection.query(queryString, function(err, result) {
+			if (err) {
+				throw err;
+			}
+
+			// Return results in callback
+			cb(result);
+		});
+	}
 };
 
-// Make the connection to MySQL
-connection.connect(function(err) {
-  if (err) {
-    console.error('ERROR: MySQL connection error -- ' + err.stack + '\n\n');
-    return;
-  }
-  console.log('Connected to MySQL database as id ' + connection.threadId + '\n\n');
-});
-
-// Export connection for ORM use
-module.exports = connection;
+// Export the orm object for use in other modules
+module.exports = orm;
