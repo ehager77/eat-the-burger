@@ -1,89 +1,38 @@
-html {
-    background-color: #FFC04C;
+.jumbotron {
+    background-image: url("../img/burger.jpg");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    margin-top: 10px;
 }
 
-body {
-    width: 75%;
-   margin: 0 auto; 
-
-   display: flex;
-   min-height: 100vh;
-   flex-direction: column;
-   background-color: white;
+.jumbotron > h1 {
+    font-family: 'Creepster', cursive;
 }
 
-#cute_burger {
-    display: block;
-   margin: auto;
+#newburger {
+    border-radius: 5px;
 }
 
-h1 {
+#color-override {
+    color: black;
     text-align: center;
-    font-family: 'Fontdiner Swanky', cursive;
-    font-size: 65px;
-    margin: 50px;
 }
 
-.burgerAvailable {
-    font-family: 'Crafty Girls', cursive;
-    font-weight: normal;
-    font-size: 20px;
+#lefthead {
+    background-color: #5cb85c;
+    color: white;
     text-align: center;
-
-    border-radius: 25px;
-    width: 100%;
-    margin: 10px;
-    padding: 10px;
-    background-color: #b7ffc2;
-    border: none;
+    font-size: 1.2em;
 }
 
-.burgerAvailable:hover {
-    background-color: #81ff94;
+#eatbutton, #trashbutton {
+    float: right;
 }
 
-.burgerEaten {
-    font-family: 'Crafty Girls', cursive;
-    font-weight: normal;
-    font-size: 20px;
+#righthead {
+    background-color: #f0ad4e;
+    color: white;
     text-align: center;
-
-    border-radius: 25px;
-    margin: 10px;
-    padding: 10px;
-    background-color: #ffd1c9;
-}
-
-h2 {
-     text-align: center;
-    font-family: 'Fontdiner Swanky', cursive;
-    font-size: 40px;
-    margin: 50px;
-}
-
-.formContainer {
-    background-color: orange;
-}
-
-.addBurgerButton {
-    font-family: 'Crafty Girls', cursive;
-    font-weight: normal;
-    font-size: 20px;
-    text-align: center;
-
-    border-radius: 25px;
-    width: 100%;
-    margin: 0;
-    padding: 10px;
-    background-color: #FFC04C;
-    border: none;
-}
-
-.addBurgerButton:active {
-   background-color: #FFC04C;
-}
-
-.burgerFooter {
-   background-color: #FFC04C;
-   padding: 20px 0;
+    font-size: 1.2em;
 }
