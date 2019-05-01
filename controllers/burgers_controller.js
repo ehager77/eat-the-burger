@@ -6,6 +6,7 @@ var burger = require('../models/burger.js');
 
 // Create the routes
 router.get('/', function(req, res) {
+  console.log("hit root route")
     burger.selectAll(function(data) {
       var hbsObject = {
         burgers: data
@@ -15,7 +16,8 @@ router.get('/', function(req, res) {
     });
   });
   
-  router.post('/burgers', function(req, res) {
+  router.post('/api/burgers', function(req, res) {
+    console.log("We hit the /api/burgers route")
     burger.insertOne([
       'burger_name'
     ], [
@@ -25,15 +27,27 @@ router.get('/', function(req, res) {
     });
   });
   
-  router.put('/burgers/:id', function(req, res) {
+  router.put('/api/burgers/:id', function(req, res) {
     var condition = 'id = ' + req.params.id;
   
     burger.updateOne({
       devoured: true
     }, condition, function(data) {
-      res.redirect('/');
+      // res.redirect('/');
+      res.json(true);
     });
   });
+
+  router.delete('api/burgers/:id', function(req, res){
+    var condition = 'id = ' + req.params.id;
+    burger.destroy({
+
+      where:{
+        id : req.params.id
+      }
+
+    });
+  })
   
 
 module.exports = router;

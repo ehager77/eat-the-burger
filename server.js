@@ -8,7 +8,7 @@ var app = express();
 //Serve static content for the app from the "public" directory in the application directory.
 // app.use(express.static(process.cwd() + '/public'));
 // app.use(express.static('public'));
-app.use(express.static(path.join(__dirname,"public")));
+app.use(express.static("public"));
 
 app.use(express.urlencoded({ extended: true }));
 
@@ -20,7 +20,7 @@ app.set('view engine', 'handlebars');
 
 
 var router = require('./controllers/burgers_controller.js');
-app.use('/', router);
+app.use(router);
 
 // Open Server
 var port = process.env.PORT || 3000;

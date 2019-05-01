@@ -1,5 +1,5 @@
 // Make sure we wait to attach our handlers until the DOM is fully loaded.
-$(function() {
+$( function() {
 
     // Add a new burger.
     $(".create-form").on("submit", function(event) {
@@ -23,13 +23,14 @@ $(function() {
 
     $("#eatbutton").on("click", function(event) {
         event.preventDefault();
-        console.log(event)
+        console.log("clicked")
 
         var id = $(this).data("id");
+        console.log("id" + id);
         var devouredState = {
             devoured: 1
         };
-
+        
         // Send the PUT request.
         $.ajax("/api/burgers/" + id, {
             type: "PUT",
@@ -49,7 +50,9 @@ $(function() {
         $.ajax({
             type: "DELETE",
             url: "/api/burgers/" + id
-        }).then(location.reload());
+        }).then(function(){
+            location.reload()
+        });
     });
 
 })
