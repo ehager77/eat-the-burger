@@ -1,6 +1,6 @@
 # eat-the-burger
 
-A Burger Eatin' Application With Node.js/Express/MySQL/Handlebars/Materialize
+A Burger Eatin' Application With Node.js/Express/MySQL/Handlebars
 
 ## Description
 This application demonstrates a simple full stack application with a front end implemented with HTML/CSS and elements from the Materialize framework and the backend implemented with Node.js and Express. HTML templating is done with the help of Handlebars.
