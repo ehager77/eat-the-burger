@@ -37,17 +37,6 @@ router.get('/', function(req, res) {
       res.json(true);
     });
   });
-
-  router.delete('api/burgers/:id', function(req, res){
-    var condition = 'id = ' + req.params.id;
-    burger.destroy({
-
-      where:{
-        id : req.params.id
-      }
-
-    });
-  })
   
 
 module.exports = router;
